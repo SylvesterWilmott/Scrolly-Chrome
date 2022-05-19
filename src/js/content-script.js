@@ -55,7 +55,7 @@ function getHeaderColor() {
 }
 
 function extractColor() {
-  let nodes = [...document.querySelectorAll("div, span, a")];
+  let nodes = [...document.querySelectorAll("div, span, p > a")];
   let colors = [];
 
   for (const node of nodes) {
@@ -66,7 +66,7 @@ function extractColor() {
       let gray = isGray(rgb);
       let l = 0.2126 * rgb.r + 0.7152 * rgb.b + 0.0722 * rgb.b;
 
-      if (l > 35 && l < 150 && !gray) {
+      if (l > 35 && l < 180 && !gray) {
         colors.push("rgb(" + rgb.r + "," + rgb.g + "," + rgb.b + ")");
       }
     }
@@ -113,9 +113,8 @@ function getColor(node) {
 
   let backgroundColor = computed.backgroundColor;
 
-  if (node.tagName === "A" || node.tagName === "SPAN") {
+  if (node.tagName === "A") {
     if (!backgroundColor || backgroundColor === transparent) {
-      console.log(computed.color);
       return computed.color;
     }
   }
